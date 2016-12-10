@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>放大镜</title>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.fangda{
+			width: 400px;
+			width: 400px;
+			position: relative;
+		}
+		.small{
+			width: 400px;
+			height: 400px;
+			overflow: hidden;
+			border: 1px solid gray;
+			position: relative;
+			cursor: move;
+		}
+		.pointer{
+			width: 150px;
+			height: 150px;
+			background: rgba(0,0,0,.5);
+			position: absolute;
+			left: 0;
+			top: 0;
+			display: none;
+		}
+		/*初始化*/
+		img{
+			border: none;;
+			border: 0;
+		}
+		.small img{
+			width: 400px;
+			height: 400px;
+			float: left;
+		}
+		.big{
+			width: 400px;
+			height: 400px;
+			border: 1px solid gray;
+			position: absolute;
+			left: 412px;
+			top: 0;
+			display: none;
+			overflow: hidden;
+		}
+		.big img{
+			width: 800px;
+			height:800px;
+			position: absolute;
+			left: 0px;
+			top: 0px;
+		}
+	</style>
+</head>
+<body>
+	<div class="fangda">
+		<div class="small">
+			<img src="image.jpg">
+			<span class="pointer"></span>
+		</div>
+		<div class="big">
+			<img src="image.jpg" width="100%" height="100%">
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+window.onload=function(){
+	var small=document.querySelector(".small")
+	var pointer=document.querySelector(".pointer")
+	var big=document.querySelector(".big");
+	var bigImage=document.querySelector(".big img")
+	small.onmouseover=function(){
+		pointer.style.display="block";
+		big.style.display="block";
+	}
+	small.onmouseout=function(){
+		pointer.style.display="none";
+		big.style.display="none";
+	}
+	small.onmousemove=function(event){
+		// ||window.event  兼容  标准浏览器 和 IE浏览器
+		var oEvent=event||window.event;
+		var x=oEvent.clientX;
+		var y=oEvent.clientY;
+
+		// 鼠标居中
+		var l=x-pointer.offsetWidth/2;
+		var t=y-pointer.offsetHeight/2;
+
+		// 横向移动范围
+		if(x<=pointer.offsetWidth/2){
+			l=0;
+		}else if(x>=small.offsetWidth-pointer.offsetWidth/2){
+			l=small.offsetWidth-pointer.offsetWidth;
+		}
+		// 竖向移动范围
+		if(y<=pointer.offsetHeight/2){
+			t=0;
+		}else if(y>=small.offsetHeight-pointer.offsetHeight/2){
+			t=small.offsetHeight-pointer.offsetHeight;
+		}
+
+		// 得到比例
+		var newX=(bigImage.offsetWidth-big.offsetWidth)/(small.offsetWidth-pointer.offsetWidth)
+		var newY=(bigImage.offsetHeight-big.offsetHeight)/(small.offsetHeight-pointer.offsetHeight)
+
+		// 跟随鼠标的位置移动
+		pointer.innerText="x:"+x + ";y:"+y;
+		pointer.style.left=l+"px";
+		pointer.style.top=t+"px";
+
+		bigImage.style.left=-l*newX+'px';
+		bigImage.style.top=-t*newY+'px';
+
+
+
+		// 第二种方法
+		// 系数
+	}
+
+}
+
+// small 的移动范围是400-150
+// big  的移动发范围是800-400
+// big/small=大图的放大比例
+
+
+</script>
+</html>
+
+
