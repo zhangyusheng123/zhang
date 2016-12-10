@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽</title>
+	<style>
+		.div1{
+			width: 100px;
+			height: 100px;
+			background: red;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+		}
+		.box{
+			border: 1px solid #000;
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	<div class="div1">
+		
+	</div>
+</body>
+<script>
+// 每移动都会有一个小div
+	var div1=document.querySelector(".div1");
+	var disX=0;
+	var disY=0;
+	var timer=null;
+
+// 	通过移动的最后两个点来找速度和方向
+	var prevX=0;
+	var prevY=0;
+	var iSpeedX=0;
+	var iSpeedY=0;
+	div1.onmousedown=function(ev){
+		var ev=ev||window.event;
+		disX=ev.clientX-div1.offsetLeft;
+		console.log(ev.clientX,div1.offsetLeft)
+		disY=ev.clientY-div1.offsetTop;
+
+		prevX=ev.clientX;
+		prevY=ev.clientY
+
+		clearInterval(timer)
+		// 移动的时候move会有反应时间
+		document.onmousemove=function(ev){
+			var ev=ev||window.event;
+			div1.style.left=ev.clientX-disX+"px";
+			div1.style.top=ev.clientY-disY+"px";
+
+			// ---移动产生div---
+			// var box=document.createElement("div");
+			// box.className="box";
+			// box.style.left=ev.clientX+"px";
+			// box.style.top=ev.clientY+"px";
+			// document.body.appendChild(box);
+
+			// 速度就是两个点得差值
+			iSpeedX=ev.clientX-prevX;
+			iSpeedY=ev.clientY-prevY;
+			// 一直保持最后两个点得差值
+			prevX=ev.clientX;
+			prevY=ev.clientY;
+			// -------
+		}
+		document.onmouseup=function(){
+			document.onmousemove=null;
+			document.onmouseup=null;
+			startMove();
+		}
+	}
+
+	function startMove(){
+		clearInterval(timer)
+		timer=setInterval(function(){
+			// 自由落体
+			iSpeedY+=3;
+			var L=div1.offsetLeft+iSpeedX;
+			var T=div1.offsetTop+iSpeedY;
+			if(L<0){
+				L=0;
+				// 控制方向
+				iSpeedX*=-1;
+				// 摩擦系数
+				iSpeedX*=0.75;
+			}else if(L>document.documentElement.clientWidth-div1.offsetWidth){
+				L=document.documentElement.clientWidth-div1.offsetWidth;
+				iSpeedX*=-1;
+				iSpeedY*=0.75;
+				iSpeedX*=0.75;
+			}
+			if(T<0){
+				T=0;
+				iSpeedY*=-1;
+			}else if(T>document.documentElement.clientHeight-div1.offsetHeight){
+				T=document.documentElement.clientHeight-div1.offsetHeight;
+				iSpeedY*=-1
+			}
+			div1.style.left=L+"px";
+			div1.style.top=T+"px";
+		},30)
+	}
+
+</script>
+</html>
