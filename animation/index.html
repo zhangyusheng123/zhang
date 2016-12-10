@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- 告诉ie低版本的去使用最新的 -->
+	<meta http-equiv="X-UA-Compatible" content="IE-edge,chrome=1">
+	<!-- initial-scale=1 在移动设备上不支持缩放 -->
+	<meta name="viewport" content="width=device-width ,initial-scale=1" >
+	<title>css3实现的页面平滑过渡</title>
+	<link rel="stylesheet" href="index.css">	
+</head>
+<body>
+	<div class="container">
+		<div class="st-container">
+		<!-- nav begin -->
+			<!-- css利用radio(单选按钮)去做切换效果 -->
+			<input type="radio" name="radio-set" checked="checked" id="st-control-1">
+			<a href="#st-panel-1">Serendipity</a>
+			<input type="radio" name="radio-set" id="st-control-2">
+			<a href="#st-panel-2">Happiness</a>
+			<input type="radio" name="radio-set" id="st-control-3">
+			<a href="#st-panel-3">Tranquillity</a>
+			<input type="radio" name="radio-set" id="st-control-4">
+			<a href="#st-panel-4">Positivity</a>
+			<input type="radio" name="radio-set" id="st-control-5">
+			<a href="#st-panel-5">Passion</a>
+			<!-- nav close -->
+			<div class="st-scroll">
+				<section class="st-panel" id="st-panel-1">
+					<div class="st-desc" data-icon="H"></div>
+					<h2>Serendipity</h2>
+					<p>Banksy adipisicing eiusmod banh mi sed.Squid stumptown est odd future nisi mlkshl pop-up adipipsicing retro.</p>
+					
+				</section>
+			</div>
+			<div class="st-scroll">
+				<section class="st-panel st-color"  id="st-panel-2">
+					<div class="st-desc" data-icon="2"></div>
+					<h2>Happiness</h2>
+					<p>Art part readymade beard labore cosby sweater culpa. art party whatever incididunt, scenester umami polaroid tofu </p>
+				</section>
+			</div>
+			<div class="st-scroll">
+				<section class="st-panel" id="st-panel-3">
+					<div class="st-desc" data-icon="B"></div>
+					<h2>Tranquillity</h2>
+					<p>Art part readymade beard labore cosby sweater culpa. art party whatever incididunt, scenester umami polaroid tofu </p>
+				</section>
+			</div>
+			<div class="st-scroll">
+				<section class="st-panel st-color" id="st-panel-4">
+					<div class="st-desc" data-icon="C"></div>
+					<h2>Positivity</h2>
+					<p>Art part readymade beard labore cosby sweater culpa. art party whatever incididunt, scenester umami polaroid tofu </p>
+					
+				</section>
+			</div>
+			<div class="st-scroll">
+				<section class="st-panel" id="st-panel-5">
+					<div class="st-desc" data-icon="2"></div>
+					<h2>Passion</h2>
+					<p>Art part readymade beard labore cosby sweater culpa. art party whatever incididunt, scenester umami polaroid tofu </p>
+				</section>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
