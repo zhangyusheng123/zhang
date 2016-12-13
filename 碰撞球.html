@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas{
+            display: block;
+            margin:0 auto;
+            border:1px #000000 solid;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas">
+
+</canvas>
+
+<script>
+    var cs = document.querySelector("#canvas");
+    cs.width = 800;
+    cs.height = 600;
+    var ctx = cs.getContext("2d");
+
+    var speedX = 3;
+    var speedY = 3;
+    var x = 100;
+    var y = 100;
+    var r = 20;
+    function drawArc(color,x,y,r){
+        ctx.clearRect(0,0,800,600)
+        ctx.save();
+        ctx.beginPath();
+        ctx.fillStyle = color;
+        ctx.arc(x,y,r,0,Math.PI*2)
+        ctx.fill();
+        ctx.closePath();
+        ctx.restore()
+    }
+
+    function move(){
+        if(x+speedX+r > cs.width || x+speedX-r < 0){
+            speedX = -speedX;
+        }
+        if(y+speedY+r > cs.height || y+speedY-r < 0){
+            speedY = -speedY;
+        }
+        x += speedX;
+        y += speedY;
+        drawArc("blue",x,y,r);
+        window.requestAnimationFrame(move);
+    }
+    move();
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

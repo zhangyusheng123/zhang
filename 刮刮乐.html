@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .container {
+            width: 400px;
+            height: 200px;
+            border: 1px dotted red;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <canvas id="c"></canvas>
+</div>
+<script>
+    var cv = document.getElementById("c");
+    var ctx = cv.getContext("2d");
+
+    cv.width = 400;
+    cv.height = 200;
+
+    // 奖品设置
+    var prizesArr = [
+        {name: "iPhone7 亮黑版", color: "rgba(0, 0, 0, 1)"},
+        {name: "iPhone7 黑色版", color: "rgba(0, 0, 0, .6)"},
+        {name: "iPhone7 安卓版", color: "rgba(0, 255, 0, 1)"},
+        {name: "iPhone7 塞班版", color: "rgba(255, 0, 0, 1)"}
+    ];
+
+    // 随机获取到一个奖品
+    var prizeObj = prizesArr[ Math.floor(Math.random() * 4) ];
+
+
+    // 思路：
+    // 1 先将文字绘制到画布中
+    // 2 将画布转化为 Base64 格式的图片
+    // 3 将图片设置为canvas的背景图片
+    // 4 给canvas画布填充灰色的矩形
+    // 5 绑定鼠标事件
+
+    // 1 设置文字的坐标
+    var x0 = cv.width / 2, y0 = cv.height / 2;
+    ctx.textAlign = "center";
+    ctx.textBaseLine = "middle";
+    ctx.font = "30px 微软雅黑";
+    ctx.fillStyle = prizeObj.color;
+    ctx.fillText(prizeObj.name, x0, y0);
+
+    // 2 将画布转化为图片
+    var img = cv.toDataURL("image/jpg", 1);
+    // 3 将图片设置为canvas的背景图片
+    cv.style.backgroundImage = "url(" + img + ")";
+
+    // 4 给canvas画布填充灰色的矩形
+    ctx.fillStyle = "silver";
+    ctx.fillRect(0, 0, cv.width, cv.height);
+
+    // 5
+    // 判断是否点击了 canvas
+    var isStart = false;
+    var radius = 10;
+    cv.onmousedown = function() {
+        isStart = true;
+    };
+    cv.onmouseup = function() {
+        isStart = false;
+        //  默认值
+        ctx.globalCompositeOperation =  'source-over';
+    };
+
+    cv.onmousemove = function(e) {
+        // 原有内容中与新图形不重叠的部分会被保留， 重叠的部分，没有了
+        ctx.globalCompositeOperation = "destination-out";
+
+        if(isStart) {
+
+            // 如果开关是 true ，才执行擦出效果
+            ctx.beginPath();
+            // ctx.arc()
+            var x = e.clientX - cv.offsetLeft;
+            var y = e.clientY - cv.offsetTop;
+
+            // ctx.fillStyle = "rgba(0, 0, 0, 1)";
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    };
+</script>
+</body>
+</html>
