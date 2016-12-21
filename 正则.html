@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>正则表达式</title>
+</head>
+<body>
+	<script>
+		// var str="he is boy,This is a dob ,Where is she";
+		// \b 边界符，单词边界 
+		// g  global 全局匹配
+		// i  ignore case  忽略大小写
+		// m 多行搜索
+		// var reg=/\bis\b/g;
+		// var STR=str.replace(reg,'IS');
+		// console.log(STR);
+
+		// 字符类
+		// [] 匹配一类字符
+		// ^ 反向类
+		// var str2="a1b2c3d4"
+		// var reg=/[abc]/g;
+		// var reg2=/[^abc]/g; 
+		// var STR=str2.replace(reg2,"X");
+		// console.log(STR)
+
+		// 范围类
+		// a-z
+		// [a-zA-z] 匹配大小字母和小写字母
+		// [0-9]
+		// console.log("a1b2sd54hg47".replace(/[a-z]/g,"Z"));
+		// console.log("aG12ETcgg12".replace(/[a-zA-z]/g,"l"));
+		// 匹配 -
+		// console.log("2012-1-3".replace(/[0-9-]/g,"A"));
+
+
+		// 预定义类
+		//  . 任意字符
+		// 	\d [0-9]  数字字符
+		//  \D [^0-9] 非数字字符
+		//  \s [\t\n\x\f\r] 空白符
+		//  \S [\t\n\x\f\r] 非空白符
+		//  \w [a-zA-Z_0-9] 单词字符（字母数字下划线）
+		//  \W [^a-zA-Z_0-9]非单词字符
+		// \B 非边界
+		// console.log("This is a dob".replace(/\Bis\b/g,"0"))
+
+
+		// 边界符
+		// ^  以xxx开始
+		// $  以xxxx结束
+		// \b 单词边界
+		// \B 非单词边界
+		// console.log("@123@abc@".replace(/@./g,"Q"));
+		// console.log("@123@abc@".replace(/^@./g,"Q"));
+		// console.log("@123@abc@".replace(/.@$/g,"Q"));
+
+		// 量词
+		// ？ 出现零次或一次(最多出现一次)
+		// +  出现一次或多次(至少出现一次)
+		// *  出现零次或多次(任意次)
+		// {n} 出现n次
+		// {n,m} 出现n到m次
+		// {n,} 至少出现n次
+		// 贪婪匹配 尽可能多的匹配 默认是贪婪模式
+		// console.log("12345678".replace(/\d{3,6}/g,"X"));
+		// 非贪婪模式 ?
+		// console.log("12345678".replace(/\d{3,6}?/g,"X"));
+
+
+		// 分组 ()   
+		// 小写字母和数字在一起连续出现三次
+		// console.log("a1s2d2sg".replace(/([a-z]\d){3}/g,"X"));
+
+		// 或
+		// console.log("ByronCasper".replace(/Byron|Casper/g,"X"))
+		// console.log("ByronsperByrCasper".replace(/Byr(on|Ca)sper/g,"X"))
+
+
+		// 反向引用 $1....$n  去捕获内容
+		// 2015-12-25 -> 12/25/2015
+		// console.log("2015-12-25".replace(/(\d{4})-(\d{2})-(\d{2})/g,"$2/$3/$1"));
+
+
+		// 前瞻
+		// console.log("a2*3".replace(/\w(?=\d)/g,"X"));
+
+
+		// 对象属性
+		// globle  是否全文搜索 默认false  只读
+		// ignorecase 是否大小写敏感 默认false 只读
+		// multiline 多行匹配 默认false 只读
+		// lastIndex 是当前表达式匹配内容的最后一个字符的下一个位置
+		// source 正则表达式的文本字符串
+		// var reg1=/\w/;
+		// var reg2=/\w/gim;
+
+
+
+		// 方法 test(str)  存在就返回true 反之为false 
+		// exec(str) 没有就返回null  否就返回一个数组 
+		// var reg1=/\w/;
+		// var reg2=/\w/gim;
+		// 用test 就别用g
+		// while(reg2.test("ab")){
+			// console.log(reg2.lastIndex);
+		// }
+
+		// 非全局调用 
+		//调用非全局的RegExp对象的exec()时，返回数组
+		// 1. 第一个元素是正则表达式相匹配的文本
+		// 2.第二个元素是与RegExpObject(分组)的第一个子表达式相匹配的文本(如果有)
+		// 3.第三个元素是与RegExp对象的第二个子表达式相匹配的文本(如果有)，依次类推
+
+		// var reg3=/\d\w\d/;
+		// var reg4=/\d\w\d/g;
+		// var ts="1a2b3c4cc5ee0";
+		// var ret=reg3.exec(ts);
+		// console.log(reg3.lastIndex+"\t"+ret.index+"\t"+ret.toString());
+		// while(ret=reg4.exec(ts)){
+		// 	console.log(reg4.lastIndex+"\t"+ret.index+'\t'+ret.toString())
+		// }
+
+
+		// 字符串对象的方法
+		// 1.search()  不执行g
+		// console.log("a1b2c3d1".search(1)); //自动转转
+		// console.log("a1b2c3d1".search(/1/g));
+
+		// 2.match
+
+
+	</script>
+</body>
+</html>

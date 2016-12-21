@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		html,body{
+			height: 100%;
+			width: 100%;
+		}
+		.container{
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+		}
+		.box{
+			min-height: 150px;
+			width: 100%;
+		}
+		.dark_blue{
+		  background-color:#00f;
+		}
+		.light_blue{
+		  background-color:#99f;
+		}
+		.green{
+		  background-color:green;
+		}
+		.red{
+		  background-color:red;
+		}
+		@media screen and (min-width: 500px){
+			.dark_blue{width:50%; }
+			#container2{width: 50%}
+		}
+		@media screen and (min-width: 600px){
+			.dark_blue{width:25%;order: 1; }
+			#container2{width: 50%;}
+			.red{width: 25%;order: -1;}
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="box dark_blue"></div>
+		<div class="container" id="container2">
+			<div class="box light_blue"></div>
+			<div class="box green"></div>
+		</div>
+		<div class="box red"></div>
+	</div>
+</body>
+</html>

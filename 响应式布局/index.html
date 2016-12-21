@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body,html{
+		  height:100%;
+		  width:100%;
+		}
+		.container{
+		  max-width:980px;
+		  margin:0 auto;
+		  height:100%;
+		  width:100%;
+		  display:flex;
+		  flex-wrap:wrap;
+		}
+		.box{
+		  width:100%;
+		}
+		.light_blue{
+		  background-color:blue;
+		}
+		.dark_green{
+		  background-color:#afa;
+		}
+		.green{
+		  background-color:green;
+		}
+		/*屏幕在450以上 25% 75%  其他的就是（.box）100% */
+		@media screen and (min-width:450px){
+		  .light_blue{width:25%;}
+		  .dark_green{width:75%;}
+		}
+		/*屏幕550以上 就是 25% 75% 25% 布局*/
+		@media screen and (min-width:550px){
+		  .light_blue,.green{width:25%;}
+		  .dark_green{width:50%;}
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="box light_blue"></div>
+		<div class="box dark_green"></div>
+		<div class="box green"></div>
+	</div>
+</body>
+</html>
